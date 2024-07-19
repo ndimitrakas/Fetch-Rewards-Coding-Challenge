@@ -14,6 +14,7 @@
 		7216EA902C4B1652004037AE /* FetchCodingChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7216EA8F2C4B1652004037AE /* FetchCodingChallengeTests.swift */; };
 		7216EA9A2C4B1652004037AE /* FetchCodingChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7216EA992C4B1652004037AE /* FetchCodingChallengeUITests.swift */; };
 		7216EA9C2C4B1652004037AE /* FetchCodingChallengeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7216EA9B2C4B1652004037AE /* FetchCodingChallengeUITestsLaunchTests.swift */; };
+		7216EAAA2C4B1786004037AE /* DessertDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7216EAA92C4B1786004037AE /* DessertDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		7216EA952C4B1652004037AE /* FetchCodingChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FetchCodingChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7216EA992C4B1652004037AE /* FetchCodingChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCodingChallengeUITests.swift; sourceTree = "<group>"; };
 		7216EA9B2C4B1652004037AE /* FetchCodingChallengeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCodingChallengeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7216EAA92C4B1786004037AE /* DessertDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				7216EA7E2C4B164F004037AE /* FetchCodingChallengeApp.swift */,
-				7216EA802C4B164F004037AE /* ContentView.swift */,
+				7216EAA82C4B176D004037AE /* Feature */,
 				7216EA822C4B1652004037AE /* Assets.xcassets */,
 				7216EA842C4B1652004037AE /* Preview Content */,
 			);
@@ -125,6 +127,15 @@
 				7216EA9B2C4B1652004037AE /* FetchCodingChallengeUITestsLaunchTests.swift */,
 			);
 			path = FetchCodingChallengeUITests;
+			sourceTree = "<group>";
+		};
+		7216EAA82C4B176D004037AE /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				7216EA802C4B164F004037AE /* ContentView.swift */,
+				7216EAA92C4B1786004037AE /* DessertDetailView.swift */,
+			);
+			path = Feature;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +270,7 @@
 			files = (
 				7216EA812C4B164F004037AE /* ContentView.swift in Sources */,
 				7216EA7F2C4B164F004037AE /* FetchCodingChallengeApp.swift in Sources */,
+				7216EAAA2C4B1786004037AE /* DessertDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
