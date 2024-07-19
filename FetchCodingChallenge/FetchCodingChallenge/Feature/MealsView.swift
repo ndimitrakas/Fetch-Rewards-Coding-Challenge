@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MealsView.swift
 //  FetchCodingChallenge
 //
 //  Created by Nick Dimitrakas on 7/19/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MealsView: View {
     var body: some View {
         NavigationView {
             NavigationLink(
@@ -26,5 +26,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    MealsView()
 }
