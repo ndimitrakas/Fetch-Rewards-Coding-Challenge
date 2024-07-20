@@ -8,31 +8,20 @@
 import SwiftUI
 
 struct MealsHomeView: View {
+    
+    @StateObject var mealsHomeViewModel = MealsHomeViewModel()
+    
     var body: some View {
         NavigationView {
             VStack {
-                List {
-                    NavigationLink(
-                    destination: MealDetailView(),
-                    label: {
+                List(mealsHomeViewModel.meals) { meal in
+                    NavigationLink(destination: MealDetailView(mealID: meal.id), label: {
                         HStack {
+                            // FIXME: replace the globe with the image of the meal
                             Image(systemName: "globe")
                                 .imageScale(.large)
                                 .foregroundStyle(.tint)
-                            Text("To detail view!")
-                            Spacer()
-                        }
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 20)
-                    })
-                    NavigationLink(
-                    destination: MealDetailView(),
-                    label: {
-                        HStack {
-                            Image(systemName: "globe")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                            Text("To detail view!")
+                            Text(meal.name)
                             Spacer()
                         }
                         .padding(.vertical, 10)
@@ -40,6 +29,11 @@ struct MealsHomeView: View {
                     })
                 }
             }
+            .onAppear {
+                    Task {
+                        await mealsHomeViewModel.fetchDessertMeals()
+                    }
+                }
             .navigationTitle("Meals")
             .navigationBarTitleDisplayMode(.large)
         }
