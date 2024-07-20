@@ -9,7 +9,13 @@ import SwiftUI
 
 struct MealDetailView: View {
     var body: some View {
-        Text("Dessert details go here, including meal name, instructions, and ingredients")
+        VStack {
+            Text("Meal name")
+            Text("Instructions")
+            Text("Ingredients with their correspending measurements")
+        }
+        .navigationTitle("DESSERT TITLE")
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 
