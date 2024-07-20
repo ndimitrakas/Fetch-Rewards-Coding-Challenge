@@ -41,8 +41,7 @@ struct ListStyledNavigationLink<Destination>: View where Destination : View {
                     .padding(.leading, 10)
                 Spacer()
             }
-            .padding(.vertical, 5)
-            .padding(.horizontal, 10)
+            .padding(.vertical, 10)
         }
     }
 }
