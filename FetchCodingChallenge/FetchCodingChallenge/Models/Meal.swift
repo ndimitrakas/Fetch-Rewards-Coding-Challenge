@@ -18,4 +18,6 @@ struct Meal: Identifiable, Codable {
         case thumbnail = "strMealThumb"
         case id = "idMeal"
     }
+    
+    static var placeholder: Meal = Meal(name: "", thumbnail: "", id: "")
 }
