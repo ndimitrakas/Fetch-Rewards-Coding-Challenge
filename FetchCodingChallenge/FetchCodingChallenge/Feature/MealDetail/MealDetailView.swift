@@ -12,20 +12,81 @@ struct MealDetailView: View {
     @StateObject var mealDetailViewModel = MealDetailViewModel()
     
     let mealID: String
+    let imageURL: String
     
     var body: some View {
-        VStack {
-            if let detail = mealDetailViewModel.mealDetail {
-                Text(detail.name)
-                Text(detail.instructions)
-                //TODO: add forEach loop for ingredients and measurements (make this look pretty)
-                //ForEach()
-            } else {
-                Text("Loading...")
+        ScrollView {
+            VStack(spacing: 20) {
+                if let detail = mealDetailViewModel.mealDetail {
+                    AsyncImage(url: URL(string: imageURL)) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                                .frame(width: 75, height: 75)
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                            // FIXME: use geometry reader to set the width
+                                .frame(width: 300)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                        case .failure:
+                            Image(systemName: "photo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 75, height: 75)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
+                    // Instructions Card View
+                    VStack(spacing: 15) {
+                        HStack {
+                            Text("Instructions")
+                                .font(.headline)
+                            Spacer()
+                        }
+                        Text(detail.instructions)
+                            
+                    }
+                    .padding(15)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(Color("CardColor"))
+                            .shadow(color: Color("Shadow").opacity(0.15), radius: 10, x: 0, y: 2)
+                    )
+                    
+                    // Ingredients and Measurements Card View
+                    VStack(alignment: .center, spacing: 15) {
+                        Text("Ingredients & Measurements")
+                                .font(.headline)
+                         
+                        VStack(spacing: 5) {
+                            ForEach(Array(zip(detail.ingredients, detail.measurements)), id: \.0) { ingredient, measurement in
+                                if !ingredient.isEmpty && !measurement.isEmpty {
+                                    Text("\(measurement) \(ingredient)")
+                                }
+                            }
+                        }
+                    }
+                    .padding(15)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(Color("CardColor"))
+                            .shadow(color: Color("Shadow").opacity(0.15), radius: 10, x: 0, y: 2)
+                    )
+                }
+                Spacer()
+            }
+            .padding(.horizontal, 30)
+            .overlay {
+                ProgressView()
+                    .opacity(mealDetailViewModel.isLoading ? 1 : 0)
             }
         }
         .navigationTitle(mealDetailViewModel.mealDetail?.name ?? "")
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             Task {
                 await mealDetailViewModel.fetchMealDetail(id: mealID)
@@ -35,5 +96,5 @@ struct MealDetailView: View {
 }
 
 #Preview {
-    MealDetailView(mealID: "53049") // Apam balik
+    MealDetailView(mealID: "", imageURL: "")
 }

@@ -109,8 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				7216EA7E2C4B164F004037AE /* FetchCodingChallengeApp.swift */,
-				7216EABB2C4C38C8004037AE /* View */,
 				7216EAAE2C4B35BD004037AE /* Service */,
+				7216EABB2C4C38C8004037AE /* View */,
 				7216EAAB2C4B3408004037AE /* Models */,
 				7216EAA82C4B176D004037AE /* Feature */,
 				7216EA822C4B1652004037AE /* Assets.xcassets */,
