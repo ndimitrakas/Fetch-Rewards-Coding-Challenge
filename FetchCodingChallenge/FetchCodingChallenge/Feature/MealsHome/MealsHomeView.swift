@@ -16,7 +16,7 @@ struct MealsHomeView: View {
             VStack {
                 List(mealsHomeViewModel.meals) { meal in
                     ListStyledNavigationLink(meal: meal) {
-                        MealDetailView(mealID: meal.id, imageURL: meal.thumbnail)
+                        MealDetailView(mealID: meal.id, imageUrl: meal.thumbnail)
                     }
                 }
             }

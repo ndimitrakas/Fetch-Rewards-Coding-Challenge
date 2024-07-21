@@ -12,7 +12,7 @@ struct MealDetailView: View {
     @StateObject var mealDetailViewModel = MealDetailViewModel()
     
     let mealID: String
-    let imageURL: String
+    let imageUrl: String
     
     var body: some View {
         ZStack {
@@ -20,55 +20,36 @@ struct MealDetailView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     if let detail = mealDetailViewModel.mealDetail {
-                        AsyncImage(url: URL(string: imageURL)) { phase in
-                            switch phase {
-                            case .empty:
-                                ProgressView()
-                                    .frame(width: 75, height: 75)
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 300)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                            case .failure:
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 75, height: 75)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                            @unknown default:
-                                EmptyView()
-                            }
-                        }
-                        // Instructions Card View
-                        VStack(spacing: 15) {
-                            HStack {
-                                Text("Instructions")
-                                    .font(.headline)
-                                Spacer()
-                            }
-                            Text(detail.instructions)
+                        AsyncImageView(imageUrl: imageUrl, imageSize: 250)
+                        
+                        // Ingredients and Measurements Card View
+                        VStack(alignment: .leading, spacing: 15) {
+                            Text("Ingredients & Measurements")
+                                .font(.headline)
                             
+                            ForEach(Array(zip(detail.ingredients, detail.measurements)), id: \.0) { ingredient, measurement in
+                                if !ingredient.isEmpty && !measurement.isEmpty {
+                                    HStack {
+                                        Text("• \(measurement) \(ingredient)")
+                                        Spacer()
+                                    }
+                                    .padding(.leading, 5)
+                                }
+                            }
                         }
+                        .frame(maxWidth: .infinity)
                         .padding(15)
                         .background(
                             RoundedRectangle(cornerRadius: 10)
                                 .foregroundColor(Color("CardColor"))
                         )
                         
-                        // Ingredients and Measurements Card View
-                        VStack(alignment: .center, spacing: 15) {
-                            Text("Ingredients & Measurements")
+                        // Instructions Card View
+                        VStack(alignment: .leading, spacing: 15) {
+                            Text("Instructions")
                                 .font(.headline)
+                            Text(detail.instructions)
                             
-                            VStack(spacing: 5) {
-                                ForEach(Array(zip(detail.ingredients, detail.measurements)), id: \.0) { ingredient, measurement in
-                                    if !ingredient.isEmpty && !measurement.isEmpty {
-                                        Text("\(measurement) \(ingredient)")
-                                    }
-                                }
-                            }
                         }
                         .padding(15)
                         .background(
@@ -96,5 +77,5 @@ struct MealDetailView: View {
 }
 
 #Preview {
-    MealDetailView(mealID: "", imageURL: "")
+    MealDetailView(mealID: "", imageUrl: "")
 }

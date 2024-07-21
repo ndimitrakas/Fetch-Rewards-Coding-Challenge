@@ -15,27 +15,7 @@ struct ListStyledNavigationLink<Destination>: View where Destination : View {
         NavigationLink(destination: destination) {
             HStack {
                 Text("") // Note: for default list separator to extend
-                AsyncImage(url: URL(string: meal.thumbnail)) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                            .frame(width: 75, height: 75)
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 75, height: 75)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                    case .failure:
-                        Image(systemName: "photo")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 75, height: 75)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                    @unknown default:
-                        EmptyView()
-                    }
-                }
+                AsyncImageView(imageUrl: meal.thumbnail, imageSize: 75)
                 Text(meal.name)
                     .fontWeight(.semibold)
                     .padding(.leading, 10)
