@@ -15,26 +15,21 @@ struct MealsHomeView: View {
         NavigationView {
             VStack {
                 List(mealsHomeViewModel.meals) { meal in
-                    NavigationLink(destination: MealDetailView(mealID: meal.id), label: {
-                        HStack {
-                            // FIXME: replace the globe with the image of the meal
-                            Image(systemName: "globe")
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                            Text(meal.name)
-                            Spacer()
-                        }
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 20)
-                    })
+                    ListStyledNavigationLink(meal: meal) {
+                        MealDetailView(mealID: meal.id, imageUrl: meal.thumbnail)
+                    }
                 }
+            }
+            .overlay {
+                ProgressView()
+                    .opacity(mealsHomeViewModel.isLoading ? 1 : 0)
             }
             .onAppear {
                     Task {
                         await mealsHomeViewModel.fetchDessertMeals()
                     }
                 }
-            .navigationTitle("Meals")
+            .navigationTitle("Desserts")
             .navigationBarTitleDisplayMode(.large)
         }
     }

@@ -34,12 +34,11 @@ struct MealDetail: Codable {
         for index in 1...20 {
             let ingredientKey = DynamicCodingKeys(stringValue: "strIngredient\(index)")!
             let measurementKey = DynamicCodingKeys(stringValue: "strMeasure\(index)")!
-            // FIXME: strip the string to make sure the string is actually empty (some of the values have a space " ") just use .strip to remove leading and trailing spaces
-            if let ingredient = try allKeys.decodeIfPresent(String.self, forKey: ingredientKey), !ingredient.isEmpty {
+            // Note: strip the strings to make sure the string has no leading and trailing spaces
+            if let ingredient = try allKeys.decodeIfPresent(String.self, forKey: ingredientKey), !ingredient.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 ingredients.append(ingredient)
             }
-            // FIXME: strip the string to make sure the string is actually empty (some of the values have a space " ") just use .strip to remove leading and trailing spaces
-            if let measurement = try allKeys.decodeIfPresent(String.self, forKey: measurementKey), !measurement.isEmpty {
+            if let measurement = try allKeys.decodeIfPresent(String.self, forKey: measurementKey), !measurement.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 measurements.append(measurement)
             }
         }
